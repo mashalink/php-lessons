@@ -28,7 +28,8 @@
 	*/
 		
 	$text = "MySecretPassword";
-	$encryptedText = crypt($text, 'xy');
+	$salt = "xy";
+	$encryptedText = crypt($text, $salt);
 	echo $encryptedText;
 	?>
 
