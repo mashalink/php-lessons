@@ -11,16 +11,12 @@
 
 
   <article class="main-content col-xs-8">
-
-
     <?php 
-
-
-/* 
-  Step1: Use a pre-built math function here and echo it
-	Step 2:  Use a pre-built string function here and echo it
-  Step 3:  Use a pre-built Array function here and echo it
-*/
+  /* 
+    Step1: Use a pre-built math function here and echo it
+    Step 2:  Use a pre-built string function here and echo it
+    Step 3:  Use a pre-built Array function here and echo it
+  */
     $number = -10;
     echo abs($number); // Pre-built math function to get absolute value
 

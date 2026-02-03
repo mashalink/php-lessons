@@ -32,8 +32,8 @@
 		echo "The sum is: " . $sum;
 
 		// Step 3: Create two arrays with the same values
-		$regularArray = array(10, 20);
-		$associativeArray = array("first" => 10, "second" => 20);
+		$regularArray = array(10, 20, 30, 40, 50);
+		$associativeArray = array("first" => 10, "second" => 20, "third" => 30, "fourth" => 40, "fifth" => 50);
 
 		echo "<br>";
 		echo "Regular Array: ";
@@ -41,10 +41,11 @@
 			echo $value . " ";
 		}	
 		echo "<br>";
-		echo "Associative Array: ";
+		echo "Associative Array: "."<br>";
 		foreach ($associativeArray as $key => $value) {
-			echo $key . " => " . $value . " ";
+			echo $key . " => " . $value . "<br>";
 		}
+		echo "Associative Array: ".implode(", ", $associativeArray);
 
 		?>
 

@@ -10,7 +10,6 @@
   </aside>
   <!--SIDEBAR-->
 
-
   <article class="main-content col-xs-8">
 
     <form method="post">

@@ -60,13 +60,7 @@ switch ($day) {
 		echo "Weekend";
 }	
 
-	
 ?>
-
-
-
-
-
 
 </article><!--MAIN CONTENT-->
 	

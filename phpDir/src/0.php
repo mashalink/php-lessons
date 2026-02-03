@@ -24,6 +24,7 @@
     Step 1:  Write "Hello PHP"
     */
     echo "Hello PHP";
+    print_r("Hello PHP");
     ?>
     </body>
 
