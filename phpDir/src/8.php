@@ -28,8 +28,8 @@
 	*/
 		
 	$text = "MySecretPassword";
-	$salt = "xy";
-	$encryptedText = crypt($text, $salt);
+	// $encryptedText = crypt($text, 'salt'); --- ALD VERSION ---
+	$encryptedText = password_hash($text, PASSWORD_DEFAULT);
 	echo $encryptedText;
 	?>
 
