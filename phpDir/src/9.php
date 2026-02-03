@@ -1,51 +1,41 @@
-<?php include "functions.php"; ?>
-<?php include "includes/header.php"; ?>
+<?php
+session_start();
 
+setcookie("TestCookie", "CookieValue", time() + 7 * 24 * 60 * 60);
 
+include "functions.php";
+include "includes/header.php";
+?>
 
 <section class="content">
 
   <aside class="col-xs-4">
-
     <?php Navigation(); ?>
-
-
   </aside>
-  <!--SIDEBAR-->
-
 
   <article class="main-content col-xs-8">
 
-
-
     <?php
-
-		/*  
-    Create a link saying Click Here, and set the link href to pass some parameters and use the GET super global to see it
-
-		Step 2 - Set a cookie that expires in one week
-
-		Step 3 - Start a session and set it to value, any value you want.
-	  */
+    // Step 1: link + GET
+    echo '<a href="?param=HelloWorld">Click Here</a><br><br>';
 
     if (isset($_GET['param'])) {
-        echo "GET parameter value: " . htmlspecialchars($_GET['param']);
+      echo "GET parameter value: " . htmlspecialchars($_GET['param']) . "<br>";
     }
-    // Step 2: Set a cookie that expires in one week
-    setcookie("TestCookie", "CookieValue", time() + (7 * 24 * 60 * 60)); // 7 days from now   
-    echo "<br>Cookie 'TestCookie' is set to: " . $_COOKIE['TestCookie'];
-    // Step 3: Start a session and set a value
-    session_start();
+
+    // Step 2: cookie (показываем аккуратно)
+    if (isset($_COOKIE['TestCookie'])) {
+      echo "Cookie value: " . htmlspecialchars($_COOKIE['TestCookie']) . "<br>";
+    } else {
+      echo "Cookie set. Refresh the page to see it.<br>";
+    }
+
+    // Step 3: session
     $_SESSION['sessionVar'] = "SessionValue";
-    echo "<br>Session variable 'sessionVar' is set to: " . $_SESSION['sessionVar'];
-
-
-		?>
-
-
-
-
+    echo "Session variable value: " . $_SESSION['sessionVar'];
+    ?>
 
   </article>
-  <!--MAIN CONTENT-->
-  <?php include "includes/footer.php"; ?>
+</section>
+
+<?php include "includes/footer.php"; ?>
