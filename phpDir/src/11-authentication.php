@@ -68,13 +68,27 @@ if ($auth && $_SERVER['REQUEST_METHOD'] === 'POST') {
 // Load user's notes
 if ($auth && $auth->isLoggedIn()) {
     try {
-        $notes = $auth->query('user_notes', ['order' => 'created_at.desc']);
-        if (!is_array($notes)) {
-            $notes = [];
-        }
+        $notes = $auth->query('user_notes', [
+            'user_id' => 'eq.' . $user['id'],
+            'order' => 'created_at.desc'
+        ]);
+        if (!is_array($notes)) $notes = [];
     } catch (Exception $e) {
-        $error = "Failed to load notes: " . $e->getMessage();
+        $msg = $e->getMessage();
+
+        // JWT expired -> вылогинить и отправить на логин
+        if (stripos($msg, 'JWT expired') !== false) {
+            $auth->logout();
+            header('Location: 11-authentication.php?error=session_expired');
+            exit;
+        }
+
+        $error = "Failed to load notes: " . $msg;
     }
+}
+
+if (isset($_GET['error']) && $_GET['error'] === 'session_expired') {
+    $error = "Session expired. Please sign in again.";
 }
 ?>
 <!DOCTYPE html>

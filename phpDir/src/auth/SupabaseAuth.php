@@ -178,18 +178,23 @@ class SupabaseAuth {
      * Log out the current user
      */
     public function logout() {
-        // Clear Supabase session
+         // НЕ дергаем Supabase, если токен уже истёк или битый
+    try {
         if ($this->accessToken) {
             $this->makeRequest('POST', '/auth/v1/logout');
         }
+    } catch (Exception $e) {
+        // silently ignore JWT errors on logout
+        // потому что expired token = уже разлогинен
+    }
 
-        // Clear PHP session
-        unset($_SESSION['supabase_access_token']);
-        unset($_SESSION['supabase_refresh_token']);
-        unset($_SESSION['supabase_user']);
+    // Всегда чистим локальную сессию
+    unset($_SESSION['supabase_access_token']);
+    unset($_SESSION['supabase_refresh_token']);
+    unset($_SESSION['supabase_user']);
 
-        $this->accessToken = null;
-        $this->user = null;
+    $this->accessToken = null;
+    $this->user = null;
     }
 
     /**
